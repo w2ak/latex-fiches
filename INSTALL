@@ -1,0 +1,5 @@
+copiez l'intégralité du répertoire dans le répertoire de vos packages latex :
+$ sudo cp -r ../package_fiches/ $LOCALTEXMF/tex/latex/
+
+mettez à jour la base de données de latex
+$ sudo texhash 
