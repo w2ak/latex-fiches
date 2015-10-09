@@ -255,7 +255,76 @@
 %========
 % Commandes de listing 1
 %========
-
+\newcommand{\vind}{\hspace{0mm}}
+\newcommand{\definition}[1]{ %definition
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{}}}
+       \hspace{\defindent}\textcolor{\defcolor}{\makebox[5mm]{\defsymb} \textbf{\defintit} : }
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{}} (#1)}
+       \hspace{\defindent}\textcolor{\defcolor}{\makebox[5mm]{\defsymb} \textbf{\defintit} [\textit{#1}] : }
+   }
+}
+\newcommand{\propriete}[1]{ %propriete
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\pptintit{}}
+       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit} : }
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} (#1)}
+       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit}[\textit{#1}] : }
+   }
+ 
+}
+ 
+\newcommand{\lemme}[1]{ %lemme
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\lemintit{}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\lemintit{}(#1)}
+   }
+   \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit} -- }
+}
+\newcommand{\proposition}[1]{ %proposition
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\prointit{}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\prointit{} (#1)}
+   }
+   \hspace{\thmindent}\textcolor{\procolor}{\makebox[5mm]{\prosymb} \textbf{\prointit}\ifthenelse{\equal{#1}{}}{}{[\textit{#1}]} -- }
+}
+\newcommand{\corollaire}[1]{ %corollaire
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\corintit{}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\corintit{}(#1)}
+   }
+   \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit} -- }
+}
+\newcommand{\theoreme}[1]{ %theoreme
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{}}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{}}(#1)}
+   }
+   \hspace{\thmindent}\textcolor{\thmcolor}{\makebox[5mm]{\thmsymb} \textbf{\thmintit} \ifthenelse{\equal{#1}{}}{}{[\emph{#1}]}-- }
+}
+ 
+\newcommand{\formule}[1]{ %formule
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{}(#1)}
+   }
+   \hspace{\defindent}\textcolor{\fmlcolor}{\makebox[5mm]{\fmlsymb} \textbf{\fmlintit} : }
+}
+\newcommand{\methode}[1]{ %methode
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{}(#1)}
+   }
+   \hspace{\defindent}\textcolor{\metcolor}{\makebox[5mm]{\metsymb} \textbf{\metintit} : }
+}
 
 %========
 % Commandes de listing 2
