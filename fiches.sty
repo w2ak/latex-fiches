@@ -116,7 +116,7 @@
 	\newcommand{\polylogohori}{logohori.eps}
 	\newcommand{\polylogovert}{logovert.eps}
 	\newcommand{\polyarmes}{newarmes.eps}
-	\newcommand{\transparent}[1]{}
+	\newcommand{\transparent}[1]{} % pour compenser le fait que la commande transparent n'existe pas en dehors de la compilation pdf
 \fi
 
 %========
@@ -271,7 +271,7 @@
        \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit} : }
    }{
        \addcontentsline{toc}{subsubsection}{\vind\pptintit{} (#1)}
-       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit}[\textit{#1}] : }
+       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit} [\textit{#1}] : }
    }
  
 }
@@ -279,10 +279,11 @@
 \newcommand{\lemme}[1]{ %lemme
    \ifthenelse{\equal{#1}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\lemintit{}}
+       \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit} -- }
    }{
        \addcontentsline{toc}{subsubsection}{\vind\lemintit{} (#1)}
+       \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit} [\textit{#1}] -- }
    }
-   \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit} -- }
 }
 \newcommand{\proposition}[1]{ %proposition
    \ifthenelse{\equal{#1}{}}{
@@ -295,10 +296,11 @@
 \newcommand{\corollaire}[1]{ %corollaire
    \ifthenelse{\equal{#1}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\corintit{}}
+       \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit} -- }
    }{
        \addcontentsline{toc}{subsubsection}{\vind\corintit{} (#1)}
+       \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit} [\textit{#1}] -- }
    }
-   \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit} -- }
 }
 \newcommand{\theoreme}[1]{ %theoreme
    \ifthenelse{\equal{#1}{}}{
@@ -306,7 +308,7 @@
    }{
        \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{}} (#1)}
    }
-   \hspace{\thmindent}\textcolor{\thmcolor}{\makebox[5mm]{\thmsymb} \textbf{\thmintit} \ifthenelse{\equal{#1}{}}{}{[\emph{#1}]}-- }
+   \hspace{\thmindent}\textcolor{\thmcolor}{\makebox[5mm]{\thmsymb} \textbf{\thmintit} \ifthenelse{\equal{#1}{}}{}{[\emph{#1}]} -- }
 }
  
 \newcommand{\formule}[1]{ %formule
@@ -315,7 +317,7 @@
    }{
        \addcontentsline{toc}{subsubsection}{\vind\fmlintit{} (#1)}
    }
-   \hspace{\defindent}\textcolor{\fmlcolor}{\makebox[5mm]{\fmlsymb} \textbf{\fmlintit} : }
+   \hspace{\defindent}\textcolor{\fmlcolor}{\makebox[5mm]{\fmlsymb} \textbf{\fmlintit} \ifthenelse{\equal{#1}{}}{}{[\emph{#1}]} : }
 }
 \newcommand{\methode}[1]{ %methode
    \ifthenelse{\equal{#1}{}}{
@@ -323,7 +325,7 @@
    }{
        \addcontentsline{toc}{subsubsection}{\vind\metintit{} (#1)}
    }
-   \hspace{\defindent}\textcolor{\metcolor}{\makebox[5mm]{\metsymb} \textbf{\metintit} : }
+   \hspace{\defindent}\textcolor{\metcolor}{\makebox[5mm]{\metsymb} \textbf{\metintit} \ifthenelse{\equal{#1}{}}{}{[\emph{#1}]} : }
 }
 
 %========
