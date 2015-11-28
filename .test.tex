@@ -1,0 +1,92 @@
+\documentclass[a4paper,11pt,twocolumn]{article}
+\usepackage[landscape]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french,noconfigs]{babel}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+			breaklinks=true,
+			urlcolor=black,
+			linkcolor=black,
+			citecolor=black}
+\usepackage{enumitem}
+\usepackage[listing,filigrane,facultatif, comments]%,couleurs]% filigrane necessite une compilation pdf pour etre mieux
+			{fiches}
+\usepackage{algorithm,algorithmic}
+
+\title[Le sous-titre le plus débile de l'histoire de l'humanité]{\TeX\oldstylenums{101}}
+\author[\nolinkurl{clement.durand+latex@polytechnique.edu}]{Clément \textsc{Durand}}
+\date\today
+
+\begin{document}
+\maketitle
+
+\section{Test des environnements de base}
+	
+	\definition{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\definition{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\propriete{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\propriete{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\lemme{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\lemme{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\proposition{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\proposition{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\corollaire{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\corollaire{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\theoreme{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\theoreme{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\formule{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\formule{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\methode{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\methode{} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+
+\section{Test des environnements de seconde catégorie}
+
+	\exemple{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+	\exple{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+	\demonstration{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+	\indication{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+\section{Test des annotations}
+	
+	\remarque{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+	\facultatif{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+	\comment{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+	\note{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+	\progress{De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.}
+	
+\section{Test des environnements personnels}
+
+	\blankitem{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+	
+	\createitem\algorithme{Algorithme}{amber}{$\clubsuit$}
+	
+	\createitem\probleme{Problème}{crimson}{$\bowtie$}
+	
+	\useitem\algorithme{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+
+	\useitem\probleme{Passion} De toutes les passions, la seule vraiment respectable me paraît être la gourmandise.
+
+\end{document}
