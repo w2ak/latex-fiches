@@ -259,84 +259,104 @@
 \newcommand{\blankintit}{}
 
 %========
+% Commandes de numérotation de listing
+%========
+\newcounter{listingnum}[section]
+\@addtoreset{listingnum}{subsection}
+\renewcommand{\thelistingnum}{
+    \ifnum\arabic{subsection}=0
+        \arabic{section}.\arabic{listingnum}
+    \else
+        \arabic{section}.\arabic{subsection}.\arabic{listingnum}
+    \fi
+}
+
+%========
 % Commandes de listing 1
 %========
 \newcommand{\vind}{\hspace{0mm}}
 \newcommand{\definition}[2][{}]{ %definition
+   \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{}}}
-       \hspace{\defindent}\textcolor{\defcolor}{\makebox[5mm]{\defsymb} \textbf{\defintit} : }
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \thelistingnum}}
+       \hspace{\defindent}\textcolor{\defcolor}{\makebox[5mm]{\defsymb} \textbf{\defintit{} \thelistingnum} : }
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{}} (#2)}
-       \hspace{\defindent}\textcolor{\defcolor}{\makebox[5mm]{\defsymb} \textbf{\defintit} [\textit{#2}] : }
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \thelistingnum} (#2)}
+       \hspace{\defindent}\textcolor{\defcolor}{\makebox[5mm]{\defsymb} \textbf{\defintit{} \thelistingnum} [\textit{#2}] : }
    }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\propriete}[2][{}]{ %propriete
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\pptintit{}}
-       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit} : }
+       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \thelistingnum}
+       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit{} \thelistingnum} : }
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} (#2)}
-       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit} [\textit{#2}] : }
+       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \thelistingnum (#2)}
+       \hspace{\defindent}\textcolor{\pptcolor}{\makebox[5mm]{\pptsymb} \textbf{\pptintit{} \thelistingnum} [\textit{#2}] : }
    }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\lemme}[2][{}]{ %lemme
+   \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\lemintit{}}
-       \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit} -- }
+       \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \thelistingnum}
+       \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit{} \thelistingnum} -- }
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\lemintit{} (#2)}
-       \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit} [\textit{#2}] -- }
+       \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \thelistingnum (#2)}
+       \hspace{\thmindent}\textcolor{\lemcolor}{\makebox[5mm]{\lemsymb} \textbf{\lemintit{} \thelistingnum} [\textit{#2}] -- }
    }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\proposition}[2][{}]{ %proposition
+   \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\prointit{}}
+       \addcontentsline{toc}{subsubsection}{\vind\prointit{} \thelistingnum}
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\prointit{} (#2)}
+       \addcontentsline{toc}{subsubsection}{\vind\prointit{} \thelistingnum (#2)}
    }
-   \hspace{\thmindent}\textcolor{\procolor}{\makebox[5mm]{\prosymb} \textbf{\prointit} \ifthenelse{\equal{#2}{}}{}{[\textit{#2}]} -- }
+   \hspace{\thmindent}\textcolor{\procolor}{\makebox[5mm]{\prosymb} \textbf{\prointit{} \thelistingnum} \ifthenelse{\equal{#2}{}}{}{[\textit{#2}]} -- }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\corollaire}[2][{}]{ %corollaire
+   \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\corintit{}}
-       \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit} -- }
+       \addcontentsline{toc}{subsubsection}{\vind\corintit{} \thelistingnum}
+       \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit{} \thelistingnum} -- }
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\corintit{} (#2)}
-       \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit} [\textit{#2}] -- }
+       \addcontentsline{toc}{subsubsection}{\vind\corintit{} \thelistingnum (#2)}
+       \hspace{\thmindent}\textcolor{\corcolor}{\makebox[5mm]{\corsymb} \textbf{\corintit{} \thelistingnum} [\textit{#2}] -- }
    }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\theoreme}[2][{}]{ %theoreme
+   \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{}}}
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{} \thelistingnum}}
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{}} (#2)}
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{} \thelistingnum} (#2)}
    }
-   \hspace{\thmindent}\textcolor{\thmcolor}{\makebox[5mm]{\thmsymb} \textbf{\thmintit} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} -- }
+   \hspace{\thmindent}\textcolor{\thmcolor}{\makebox[5mm]{\thmsymb} \textbf{\thmintit{} \thelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} -- }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\formule}[2][{}]{ %formule
+   \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{}}
+       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{} \thelistingnum}
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{} (#2)}
+       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{} \thelistingnum (#2)}
    }
-   \hspace{\defindent}\textcolor{\fmlcolor}{\makebox[5mm]{\fmlsymb} \textbf{\fmlintit} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
+   \hspace{\defindent}\textcolor{\fmlcolor}{\makebox[5mm]{\fmlsymb} \textbf{\fmlintit{} \thelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\methode}[2][{}]{ %methode
+   \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\metintit{}}
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{} \thelistingnum}
    }{
-       \addcontentsline{toc}{subsubsection}{\vind\metintit{} (#2)}
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{} \thelistingnum (#2)}
    }
-   \hspace{\defindent}\textcolor{\metcolor}{\makebox[5mm]{\metsymb} \textbf{\metintit} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
+   \hspace{\defindent}\textcolor{\metcolor}{\makebox[5mm]{\metsymb} \textbf{\metintit{} \thelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 
