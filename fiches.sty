@@ -263,7 +263,7 @@
 %========
 \newcounter{listingnum}[section]
 \@addtoreset{listingnum}{subsection}
-\renewcommand{\thelistingnum}{
+\newcommand{\lelistingnum}{
     \ifnum\arabic{subsection}=0
         \arabic{section}.\arabic{listingnum}
     \else
@@ -276,6 +276,7 @@
 %========
 \newcommand{\vind}{\hspace{0mm}}
 \newcommand{\definition}[2][{}]{ %definition
+   \renewcommand{\thelistingnum}{la définition \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \thelistingnum}}
@@ -287,6 +288,7 @@
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\propriete}[2][{}]{ %propriete
+   \renewcommand{\thelistingnum}{la propriété \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \thelistingnum}
@@ -298,6 +300,7 @@
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\lemme}[2][{}]{ %lemme
+   \renewcommand{\thelistingnum}{le lemme \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \thelistingnum}
@@ -309,6 +312,7 @@
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\proposition}[2][{}]{ %proposition
+   \renewcommand{\thelistingnum}{la proposition \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\prointit{} \thelistingnum}
@@ -319,6 +323,7 @@
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\corollaire}[2][{}]{ %corollaire
+   \renewcommand{\thelistingnum}{le corollaire \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\corintit{} \thelistingnum}
@@ -330,6 +335,7 @@
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\theoreme}[2][{}]{ %theoreme
+   \renewcommand{\thelistingnum}{le théorème \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{} \thelistingnum}}
@@ -340,6 +346,7 @@
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\formule}[2][{}]{ %formule
+   \renewcommand{\thelistingnum}{la formule \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\fmlintit{} \thelistingnum}
@@ -350,6 +357,7 @@
    \ifthenelse{\equal{#1}{}}{}{\label{#1}}
 }
 \newcommand{\methode}[2][{}]{ %methode
+   \renewcommand{\thelistingnum}{la méthode \lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#2}{}}{
        \addcontentsline{toc}{subsubsection}{\vind\metintit{} \thelistingnum}
@@ -389,7 +397,7 @@
 \if@facu
 \newcommand{\facultatif}[1]{#1}
 \else
-\newcommand{\facultatif}[1]{}
+\newcommand{\facultatif}[1]{
 \fi
 \if@comm
 \newcommand{\comment}[1]{\begin{flushright}\textit{\textcolor{red}{#1}}\end{flushright}}
