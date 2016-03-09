@@ -355,7 +355,7 @@
 %=========
 % Autres commandes
 %=========
-\newcommand{\remarque}[1]{\textbf{\remintit{}~:} #1}
+\newcommand{\remarque}[2][{}]{\textbf{\remintit{}~:} #2\ifthenelse{\equal{#1}{}}{}{\hfill\makebox{-- \textit{#1}}}}
 
 %=========
 % Facultatif et commentaires
