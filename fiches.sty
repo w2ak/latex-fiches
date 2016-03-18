@@ -33,7 +33,7 @@
 \RequirePackage[pagestyles]{titlesec}%En-têtes et pieds de page
 \RequirePackage{graphicx}%Utilisation de logo
 \RequirePackage{geometry}%Redéfinition des marges
-\RequirePackage{color}%Pour utiliser des couleurs
+\RequirePackage{xcolor}%Pour utiliser des couleurs
 \RequirePackage{lmodern}%Police de texte
 \RequirePackage{multicol}
 \RequirePackage{amsmath}
@@ -43,6 +43,7 @@
 \RequirePackage{transparent}
 \RequirePackage{xargs}
 \RequirePackage{stmaryrd}
+\RequirePackage{hyperref}
 
 %========
 % Définition des couleurs
@@ -75,6 +76,14 @@
 \couleur{grey}{128,128,128}
 \couleur{lightgrey}{192,192,192}
 \couleur{white}{255,255,255}
+
+\colorlet{refs}{black}
+\hypersetup{colorlinks=true,
+            breaklinks=true,
+            urlcolor=refs,
+            linkcolor=refs,
+            citecolor=refs}
+
 \AtBeginDocument{
 \if@couleurs
 \renewcommand{\couleur}[2]{
@@ -160,7 +169,7 @@
 		\footrule
 		\setfoot{\includegraphics[height=\hauteurlogohori]{\polylogohori}}
 							{\raisebox{7mm}{\polycrsave}}
-							{\raisebox{7mm}{\large\thepage/\pageref{lastpage}}}
+							{\raisebox{7mm}{\large\thepage/{\colorlet{refs}{black}\pageref{lastpage}}}}
 	}
 		\pagestyle{monstyle}
 		\renewcommand{\makefootrule}{%
@@ -385,17 +394,17 @@
 %========
 \newcommand{\exemple}[1]{ %exemple
 	\addcontentsline{toc}{subsubsection}{\vind\textit{\expintit}}
-	\hspace{\defindent}{\color{\expcolor}\textbf{\expintit} : #1}
+	\hspace{\defindent}{\colorlet{refs}{\expcolor}\color{\expcolor}\textbf{\expintit} : #1}
 }
 \newcommand{\exple}[1]{ %exemple
-	{\color{\expcolor}\textit{(\MakeLowercase{\expintit}\ifthenelse{\equal{#1}{}}{}{ : #1})}}
+	{\colorlet{refs}{\expcolor}\color{\expcolor}\textit{(\MakeLowercase{\expintit}\ifthenelse{\equal{#1}{}}{}{ : #1})}}
 }
 \newcommand{\demonstration}[1]{ %demonstration
 	\addcontentsline{toc}{subsubsection}{\vind\textit{\demintit}}
-	{\color{\demcolor}\textit{\demintit} : #1 \hfill \demsymb\hspace*{-1mm}}
+	{\colorlet{refs}{\demcolor}\color{\demcolor}\textit{\demintit} : #1 \hfill \demsymb\hspace*{-1mm}}
 }
 \newcommand{\indication}[1]{ %indication
-	{\color{\indcolor}[\textit{\indintit} : #1 \hfill ]\hspace*{-1mm}}
+	{\colorlet{refs}{\indcolor}\color{\indcolor}[\textit{\indintit} : #1 \hfill ]\hspace*{-1mm}}
 }
 
 %=========
