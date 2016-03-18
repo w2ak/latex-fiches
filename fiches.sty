@@ -269,7 +269,7 @@
 % Commandes de numérotation de listing
 %========
 \if@labels
-\newcommand{\etiquette}[1]{\label{#1}\marginpar{\raisebox{-2cm}{\rotatebox{90}{\scriptsize\ttfamily\fbox{\makebox[2cm]{#1}}}}}}
+\newcommand{\etiquette}[1]{\label{#1}\marginpar{{\rotatebox[origin=c]{90}{\scriptsize\ttfamily\fbox{\makebox[2cm]{#1}}}}}}
 \else
     \newcommand{\etiquette}[1]{\label{#1}}
 \fi
