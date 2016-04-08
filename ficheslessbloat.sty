@@ -1,0 +1,361 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ficheslessbloat}[2015/06/11 v1.0, fiches de cours]
+
+%========
+% Déclaration des options
+%========
+\DeclareOption{listing}{\setcounter{tocdepth}{5}}
+\newif\if@fili \@filifalse
+\DeclareOption{filigrane}{\@filitrue}
+\newif\if@comm \@commfalse
+\DeclareOption{comments}{\@commtrue}
+\newif\if@facu \@facufalse
+\DeclareOption{facultatif}{\@facutrue}
+\newif\if@labels \@labelsfalse
+\DeclareOption{labels}{\@labelstrue}
+\DeclareOption{print}{
+	\@commfalse
+	\@labelsfalse
+}
+
+\ProcessOptions\relax
+
+%========
+% Packages requis
+%========
+\RequirePackage{ifthen}%Pour ecrire des conditions
+\RequirePackage{ifpdf}%Pour detecter le mode de compilation
+\RequirePackage[pagestyles]{titlesec}%En-têtes et pieds de page
+\RequirePackage{graphicx}%Utilisation de logo
+\RequirePackage{geometry}%Redéfinition des marges
+\RequirePackage{xcolor}%Pour utiliser des couleurs
+\RequirePackage{lmodern}%Police de texte
+\RequirePackage{multicol}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{mathrsfs}
+\RequirePackage{eso-pic}
+\RequirePackage{transparent}
+\RequirePackage{xargs}
+\RequirePackage{stmaryrd}
+\RequirePackage{hyperref}
+
+%========
+% Définition des couleurs
+%========
+\newcommand{\couleur}[2]{
+	\definecolor{#1}{RGB}{#2}
+}
+\couleur{black}{0,0,0}
+\couleur{darkgrey}{64,64,64}
+\couleur{grey}{128,128,128}
+\couleur{lightgrey}{192,192,192}
+\couleur{white}{255,255,255}
+
+\colorlet{refs}{black}
+\hypersetup{colorlinks=true,
+            breaklinks=true,
+            urlcolor=refs,
+            linkcolor=refs,
+            citecolor=refs}
+
+%========
+% Logos
+%========
+\ifpdf%les chemins d'image dependent du mode de compilation
+	\newcommand{\polylogohori}{logohori.pdf}
+	\newcommand{\polylogovert}{logovert.pdf}
+	\newcommand{\polyarmes}{newarmes.pdf}
+\else
+	\newcommand{\polylogohori}{logohori.eps}
+	\newcommand{\polylogovert}{logovert.eps}
+	\newcommand{\polyarmes}{newarmes.eps}
+	\newcommand{\transparent}[1]{} % pour compenser le fait que la commande transparent n'existe pas en dehors de la compilation pdf
+\fi
+
+%========
+% Longueurs (logos et mise en page)
+%========
+\newlength{\hauteurlogohori}\setlength{\hauteurlogohori}{15mm}
+\newlength{\largeurlogovert}\setlength{\largeurlogovert}{25mm}
+
+%========
+% Geometrie de la page, mise en page
+%========
+\geometry{%definit les marges
+	top=35mm,headheight=23mm,headsep=5mm,
+	left=30mm,right=30mm,
+	bottom=37mm,footskip=20mm
+}
+
+\if@fili
+	\AddToShipoutPictureBG{\AtPageCenter{\makebox[0pt]{\raisebox{-0.5\textheight}[0pt][0pt]{\transparent{0.35}\includegraphics[height=\textheight]{\polyarmes}}}}}
+\fi
+
+
+\newcommand{\polycrsave}{} %sauvegarde du copyright
+\newcommand{\entetes}{%reglages des entetes
+	\newpagestyle{monstyle}{
+		\headrule
+		\sethead{}
+							{\large\polytitresave}
+							{}
+		\footrule
+		\setfoot{\includegraphics[height=\hauteurlogohori]{\polylogohori}}
+							{\raisebox{7mm}{\polycrsave}}
+							{\raisebox{7mm}{\large\thepage/{\colorlet{refs}{black}\pageref{lastpage}}}}
+	}
+		\pagestyle{monstyle}
+		\renewcommand{\makefootrule}{%
+			\makebox[0pt][l]{\rule[\hauteurlogohori]{\linewidth}{0.8pt}}
+		}
+		\renewcommand{\makeheadrule}{%
+			\makebox[0pt][l]{\rule[-0.4\baselineskip]{\linewidth}{0.8pt}}
+		}
+
+}
+\newcommand{\polytitresave}{}%stockage du titre
+\newcommand{\polysoustitresave}{}%stockage du sous-titre
+\renewcommand*{\title}[2][]{
+	\renewcommand*{\polytitresave}{#2}%enregistrement du titre
+	\renewcommand*{\polysoustitresave}{#1}%enregistrement du sous-titre
+	\entetes{}%activation des en tetes
+}
+\newcommand{\polyauthorsave}{}
+\renewcommand*{\author}[2][]{
+	\renewcommand*{\polyauthorsave}{#2}
+	\renewcommand*{\polycrsave}{#1}
+}
+\newcommand{\polydatesave}{\today}
+\renewcommand*{\date}[1]{
+	\renewcommand*{\polydatesave}{#1}
+}
+
+%========
+% Definition de la page de titre
+%========
+\renewcommand*{\maketitle}{
+	\begin{center}
+		\phantom{0}\vspace{7mm}
+	
+		\includegraphics[width=\largeurlogovert]{\polylogovert}
+		
+		\vspace{2mm}
+		{\Huge \polytitresave}\\
+		{\LARGE \polysoustitresave}
+		
+		\vspace{7mm}{\Large\polyauthorsave}
+		
+		\vspace{1mm}{\large\polydatesave}
+		
+		\vspace{10mm}
+	\end{center}
+	
+	\tableofcontents
+	\clearpage
+}
+
+%========
+% Page totale
+%========
+\AtEndDocument{
+\label{lastpage}
+}
+
+%========
+% Commandes d'aspect de listing
+%========
+
+\newcommand{\defintit}{Définition}%definition
+\newcommand{\pptintit}{Propriété}%propriete
+\newcommand{\lemintit}{Lemme}%lemme
+\newcommand{\prointit}{Proposition}%proposition
+\newcommand{\corintit}{Corollaire}%corollaire
+\newcommand{\thmintit}{Théorème}%theoreme
+\newcommand{\fmlintit}{Formule}%formule
+\newcommand{\metintit}{Méthode}%methode
+\newcommand{\expintit}{Exemple}%exemple
+\newcommand{\demintit}{Démonstration}%demonstration
+\newcommand{\indintit}{Indication}%indication
+\newcommand{\remintit}{Remarque}%remarque
+\newcommand{\blankintit}{}
+
+%========
+% Commandes de numérotation de listing
+%========
+\if@labels
+    \newcommand{\etiquette}[1]{\label{#1}\marginpar{{\rotatebox[origin=c]{90}{\scriptsize\ttfamily\fbox{\makebox[2cm]{#1}}}}}}
+\else
+    \newcommand{\etiquette}[1]{\label{#1}}
+\fi
+\newcounter{listingnum}[section]
+\@addtoreset{listingnum}{subsection}
+\newcommand{\lelistingnum}{
+    \ifnum\arabic{subsection}=0
+        \arabic{section}.\arabic{listingnum}
+    \else
+        \arabic{section}.\arabic{subsection}.\arabic{listingnum}
+    \fi
+}
+
+%========
+% Commandes de listing 1
+%========
+\newcommand{\vind}{\hspace{0mm}}
+\newcommand{\definition}[2][{}]{ %definition
+   \renewcommand{\thelistingnum}{la définition \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \lelistingnum}}
+       \textbf{\defintit{} \lelistingnum} :
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \lelistingnum} (#2)}
+       \textbf{\defintit{} \lelistingnum} [\textit{#2}] :
+   }
+}
+\newcommand{\propriete}[2][{}]{ %propriete
+   \renewcommand{\thelistingnum}{la propriété \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \lelistingnum}
+       \textbf{\pptintit{} \lelistingnum} :
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \lelistingnum (#2)}
+       \textbf{\pptintit{} \lelistingnum} [\textit{#2}] :
+   }
+}
+\newcommand{\lemme}[2][{}]{ %lemme
+   \renewcommand{\thelistingnum}{le lemme \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \lelistingnum}
+       \textbf{\lemintit{} \lelistingnum} --
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \lelistingnum (#2)}
+       \textbf{\lemintit{} \lelistingnum} [\textit{#2}] --
+   }
+}
+\newcommand{\proposition}[2][{}]{ %proposition
+   \renewcommand{\thelistingnum}{la proposition \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\prointit{} \lelistingnum}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\prointit{} \lelistingnum (#2)}
+   }
+   \textbf{\prointit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\textit{#2}]} --
+}
+\newcommand{\corollaire}[2][{}]{ %corollaire
+   \renewcommand{\thelistingnum}{le corollaire \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\corintit{} \lelistingnum}
+       \textbf{\corintit{} \lelistingnum} --
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\corintit{} \lelistingnum (#2)}
+       \textbf{\corintit{} \lelistingnum} [\textit{#2}] --
+   }
+}
+\newcommand{\theoreme}[2][{}]{ %theoreme
+   \renewcommand{\thelistingnum}{le théorème \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{} \lelistingnum}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\thmintit{} \lelistingnum} (#2)}
+   }
+   \textbf{\thmintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} --
+}
+\newcommand{\formule}[2][{}]{ %formule
+   \renewcommand{\thelistingnum}{la formule \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{} \lelistingnum}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\fmlintit{} \lelistingnum (#2)}
+   }
+   \textbf{\fmlintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} :
+}
+\newcommand{\methode}[2][{}]{ %methode
+   \renewcommand{\thelistingnum}{la méthode \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{} \lelistingnum}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{} \lelistingnum (#2)}
+   }
+   \textbf{\metintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} :
+}
+
+%========
+% Commandes de listing 2
+%========
+\newcommand{\exemple}[1]{ %exemple
+	\addcontentsline{toc}{subsubsection}{\vind\textit{\expintit}}
+	\textbf{\expintit} : #1
+}
+\newcommand{\exple}[1]{ %exemple
+	{\textit{(\MakeLowercase{\expintit}\ifthenelse{\equal{#1}{}}{}{ : #1})}}
+}
+\newcommand{\demonstration}[1]{ %demonstration
+	\addcontentsline{toc}{subsubsection}{\vind\textit{\demintit}}
+	{\textit{\demintit} : #1 \hfill \hspace*{-1mm}}
+}
+\newcommand{\indication}[1]{ %indication
+	{[\textit{\indintit} : #1 \hfill ]\hspace*{-1mm}}
+}
+
+%=========
+% Autres commandes
+%=========
+\newcommand{\remarque}[2][{}]{\textbf{\remintit{}~:} #2\ifthenelse{\equal{#1}{}}{}{\hfill\makebox{-- \textit{#1}}}}
+\renewcommand{\thefootnote}{[\arabic{footnote}]}
+
+%=========
+% Facultatif et commentaires
+%=========
+\if@facu
+\newcommand{\facultatif}[1]{#1}
+\else
+\newcommand{\facultatif}[1]{}
+\fi
+\if@comm
+\newcommand{\comment}[1]{\begin{flushright}\textit{\textcolor{red}{#1}}\end{flushright}}
+\newcommand{\note}[1]{\begin{flushright}\textit{\textcolor{cobalt}{#1}}\end{flushright}}
+\newcommand{\progress}[1]{\begin{center}\textbf{\textcolor{emerald}{#1}}\end{center}}
+\else
+\newcommand{\comment}[1]{}
+\newcommand{\note}[1]{}
+\newcommand{\progress}[1]{}
+\fi
+
+%=========
+% Créer son propre environnement de type 1
+%=========
+\newcommand{\blankitem}[1]{ %theoreme
+   \ifthenelse{\equal{#1}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\blankintit{}}}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\textbf{\blankintit{}} (#1)}
+   }
+   \hspace{\thmindent}\textcolor{\blankcolor}{\makebox[5mm]{\blanksymb} \textbf{\blankintit} \ifthenelse{\equal{#1}{}}{}{[\emph{#1}]} -- }
+}
+\newcommand{\createitem}[4]{
+	\newcommand{#1}{
+		\renewcommand\blankintit{#2}
+		\renewcommand\blankcolor{#3}
+		\renewcommand\blanksymb{#4}
+	}
+}
+\newcommand{\useitem}[2]{
+	#1{}
+	\blankitem{#2}
+}
