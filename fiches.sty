@@ -211,25 +211,25 @@
 %========
 % Definition de la page de titre
 %========
-\renewcommand*{\maketitle}{
+\renewcommand*{\maketitle}[1][{}]{
 	\begin{center}
-		\phantom{0}\vspace{7mm}
+		\phantom{0}\vspace*{7mm}
 	
 		\includegraphics[width=\largeurlogovert]{\polylogovert}
 		
-		\vspace{2mm}
-		{\Huge \polytitresave}\\
-		{\LARGE \polysoustitresave}
+		\vspace*{2mm}{\Huge \polytitresave}
+
+                \vspace*{2mm}{\LARGE \polysoustitresave}
 		
-		\vspace{7mm}{\Large\polyauthorsave}
+		\vspace*{7mm}{\Large\polyauthorsave}
 		
-		\vspace{1mm}{\large\polydatesave}
+		\vspace*{1mm}{\large\polydatesave}
 		
-		\vspace{10mm}
+		\vspace*{10mm}
 	\end{center}
 	
-	\tableofcontents
-	\clearpage
+        \ifthenelse{\equal{#1}{notoc}}{}{\tableofcontents
+        \clearpage}
 }
 
 %========
