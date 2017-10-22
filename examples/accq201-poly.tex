@@ -1,0 +1,380 @@
+\documentclass[a4paper,11pt,twocolumn]{article}\usepackage[landscape]{geometry}
+
+%\documentclass[a3paper,10pt,twocolumn]{article}
+
+%\documentclass[a5paper,11pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french,noconfigs]{babel}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+			breaklinks=true,
+			urlcolor=black,
+			linkcolor=black,
+			citecolor=black}
+\usepackage{enumitem}
+\usepackage{biblatex}
+\usepackage[listing,filigrane,facultatif, comments]%,couleurs]% filigrane necessite une compilation pdf pour etre mieux
+			{fiches}
+
+\title[Structures algébriques finies]{ACCQ201 - Résultats principaux}
+\author[\nolinkurl{neze@eleves.polytechnique.fr}]{Clément \textsc{Durand}}
+%\date{}
+
+\addbibresource{accq201-poly.bib}
+
+\begin{document}
+\input{../lib/shortcuts}
+\maketitle
+
+\section{Groupes}
+
+  \subsection{Relations d'équivalence, structure quotient}
+
+    \definition{Relation} $\R\subset E\times E$ est une relation. Pour $(x,y)\in\R$ on note $x\R y$.
+
+    \definition{Relation d'équivalence} $\R$ est dite
+    \begin{itemize}
+      \item \emph{réflexive} si $\forall x, x\R x$
+      \item \emph{symétrique} si $\forall x,y, x\R y \implies y\R x$
+      \item \emph{transitive} si $\forall x,y,z, x\R y \wedge y\R z \implies x\R z$
+    \end{itemize}
+
+    $\R$ est dite d'équivalence si elle vérifie les trois propriétés précédentes.
+
+    \definition{Classe d'équivalence} On dit que $A\subset E$ est une \emph{classe d'équivalence} pour $\sim$ si
+    \begin{itemize}
+      \item $A\neq\emptyset$
+      \item $\forall x,y\in A, x\sim y$
+      \item $\forall x\in A, \forall y\notin A, x\nsim y$
+    \end{itemize}
+
+    On note $E/\sim$ l'ensemble quotient de $E$ par $\sim$, i.e., l'ensemble de ses classes d'équivalences.
+
+    \proposition{Partition} Les classes d'équivalence forment une partition de $E$. $A_x:=\{y:x\sim y\}$ est l'unique classe d'équivalence contenant $x$.
+
+    Par conséquent, $\displaystyle\abs{E} = \sum[A\in E/\sim]{\abs{A}}$.
+
+    \definition{Projection canonique} On associe à $\sim$ la projection canonique
+    \[\fsys{\pi}{E}{E/\sim}{x}{A_x = \bar{x}}\]
+
+    \theoreme{Factorisation} Soient $E,F$, $\sim$ une relation d'équivalence sur $E$ et $f:E\rightarrow F$ une application. Les \Asse{}.
+    \begin{itemize}
+      \item $f$ est compatible avec $\sim$, i.e., $x\sim y \implies f(x)=f(y)$.
+      \item $f$ est factorisable à droite par $\pi$.
+    \end{itemize}
+
+    Cette factorisation est alors unique.
+
+    \definition{Passage au quotient} On dit que $g: f=g\circ\pi$ est l'application déduite de $f$ par \emph{passage au quotient}.
+
+  \subsection{Généralités sur les groupes}
+
+    \definition{Groupe} Un groupe $G (G,\star,e)$ est la donnée d'un ensemble $G$, une loi de composition interne $\star$ et de $e\in G$ tels que
+    \begin{itemize}
+      \item $\star$ est associative
+      \item $e$ est neutre pour $\star$
+      \item tout $x$ est inversible par $\star$
+    \end{itemize}
+    L'inverse est alors unique. On dit que $G$ est \emph{abélien} si $\star$ est aussi commutative.
+
+    \definition{Sous-groupe} $H$ est un sous-groupe de $G$ s'il contient l'élément neutre et est stable par inverse et composition.
+
+    \lemme{Stabilité par intersection} L'intersection d'une famille quelconque de sous-groupes est toujours un sous-groupe.
+
+    \proposition{Sous-groupe engendré} Soit $S\subset G$. L'intersection de tout sous-groupe de $G$ contenant $S$ est le plus petit sous-groupe de $G$ contenant $S$. On le note $\langle S\rangle$ sous-groupe engendré par $S$.
+
+    $\langle S\rangle$ est aussi l'ensemble des $s_1\star s_2\star\cdots\star s_n$ pour toute suite finie $s_1\ldots s_n$ d'éléments de $S$.
+
+    \subsubsection{Groupe quotient}
+
+      \proposition{Relation induite} Soit $H$ sous-groupe de $G$. La relation $\sim$ définie par $x\sim y\ssi x^{-1}y\in H$ est une relation d'équivalence dont les classes sont les $xH$.
+
+      On définit alors l'indice $[G:H] = \abs{G/H}$ de $G$ dans $H$.
+
+      \proposition{Indice} Si $G$ est un groupe fini alors $\abs{G} = [G:H] \times \abs{H}$.
+
+    \subsubsection{Action d'un groupe sur un ensemble}
+
+      \definition{Action de groupe} $G\acts X$ sur un ensemble $X$ est une application $g,x\mapsto g\cdot x$ telle que
+      \begin{itemize}
+        \item $\forall x, e\cdot x = x$
+        \item $\forall g,h,x, g\cdot(h\cdot x) = (g\star h)\cdot x$
+      \end{itemize}
+
+      \proposition{Stabilisateur} Pour $x\in X$ on définit $G_x$ le \emph{stabilisateur} de $x$ par l'action $G\acts X$ et $O_x$ son orbite.
+      \[G_x = \{ g\in G: g\cdot x = x \}\]
+      \[O_x = \{ g\cdot x: g\in G \} = G\cdot x\]
+
+      Le stabilisateur est un sous-groupe de $G$.
+
+      Les orbites sont les classes d'équivalence de la relation $\sim: x\sim y\ssi \exists g, g\cdot x = y$.
+
+      \proposition{Passage au quotient} Soit $G\acts X$. Pour tout $x$, l'application $g\mapsto g\cdot x$ induit par passage au quotient une bijection $G/G_x \simeq O_x$.
+      \[\abs{O_x} = [G:G_x]\]
+
+      \theoreme{Formule de Burnside} Soit $G\acts X$. Le nombre d'orbites $O_x$ est égal à l'espérance du nombre de points fixes d'un élément de $g$.
+      \[\abs{G/X} = \frac1{\abs{G}}\sum[g\in G]{\abs{\{x\in X: g\cdot x = x\}}}\]
+
+    \subsubsection{Morphismes}
+
+      \definition{Morphisme} Un morphisme d'un groupe $G$ dans un groupe $H$ est une application $\varphi:G\rightarrow H$ qui respecte les structures. $\varphi(e_G) = e_H$, $\varphi(x^{-1}) = \varphi(x)^{-1}$, $\varphi(xy) = \varphi(x)\varphi(y)$.
+
+      \proposition{Stabilité des sous-groupes} L'image réciproque d'un sous-groupe par un morphisme reste un sous-groupe. Il en va de même pour l'image d'un sous-groupe.
+
+      \definition{Noyau, image} On appelle noyau $\ker\varphi$ de $\varphi$ l'image réciproque du sous-groupe trivial de $H$, et image $\im\varphi$ de $\varphi$ l'image de $G$.
+
+      \proposition{Injectivité, surjectivité} $\varphi$ est injectif si et seulement si $\ker\varphi$ est trivial, et surjectif si et seulement si $\im\varphi$ est égal à $H$.
+
+    \subsubsection{Groupe quotient d'un groupe abélien par un sous-groupe}
+
+      \lemme{Stabilité} Soit $H$ sous-groupe de $G$ abélien. Si $A$ et $B$ sont deux classes modulo $H$, alors $A+B$ aussi. Autrement dit la loi de composition passe au quotient et on peut définir $\bar{a}+\bar{b} := \overline{a+b}$.
+
+      \definition{Groupe quotient} L'ensemble $G/H$ muni de cette loi est appelé groupe quotient de $G$ sur $H$.
+
+      \proposition{Projection} La projection canonique $\pi:G\rightarrow G/H$ est un morphisme sujectif de noyau $H$.
+
+      \theoreme{Sous-groupes du quotient} Les sous-groupes de $G/H$ sont naturellement en bijection avec les sous-groupes de $G$ contenant $H$. Plus précisément, on met en évidence
+      \[\begin{array}{rrcl}
+          {}&G&\longleftrightarrow&G/H\\
+          \Phi:&A&\longmapsto&\pi^{-1}(A) = \{x: x+H = A\}\\
+          \Phi^{-1}:&\pi(B) = B/H&\reflectbox{$\longmapsto$}&B
+      \end{array}\]
+
+    \subsubsection{Morphisme défini par passage au quotient}
+
+      \theoreme{Factorisation} Soient $\varphi:G\rightarrow G'$ un morphisme de groupes abéliens, $H\preccurlyeq G$ un sous-groupe de $G$ et $\pi:G\rightarrow G/H$ la projection canonique. Alors les \Asse{}.
+      \begin{itemize}
+        \item $\ker\varphi\supset H$
+        \item $\varphi$ est factorisable à droite par $\pi$ en une composition de morphismes.
+      \end{itemize}
+
+      Le morphisme facteur $g: \varphi = g\circ \pi$ est alors unique, et on a $\im\varphi = \im g$ et $\ker g = \ker\varphi/H$
+
+      \corollaire{Passage au quotient} Si $\varphi$ est un morphisme de groupes abéliens, il induit par passage au quotient un isomorphisme $G/\ker\varphi \simeq \im\varphi$. En particulier si $G$ est fini, $\abs{G} = \abs{\ker\varphi}\times\abs{\im\varphi}$.
+
+    \subsubsection{Sous-groupes monogènes, ordre d'un élément}
+
+      \definition{Ordre d'un élément} Si $x\in G$ on définit l'ordre $\omega(x)$ de $x$ dans $G$ le plus petit entier $n>0$ tel que $x^n=e$, ou $+\infty$ à défaut.
+
+      \lemme{Stabilité de l'ordre} Soit $\varphi$ un morphisme de groupes injectif. Alors $\varphi$ préserve l'ordre.
+
+      \lemme{Ordre d'une puissance} Soit $x$ d'ordre fini. Alors pour tout $d\divides \omega(x)$, $\omega(x^d)\times d = \omega(x)$.
+
+      \lemme{Morphisme avec $\setZ$} Pour tout $x\in G$, $k\mapsto x^k$ est l'unique morphisme de $\setZ$ sur $G$ envoyant $1$ sur $x$. Son image est $\langle x\rangle$.
+
+      \lemme{Sous-groupes de $\setZ$} Tout sous-groupe non nul de $\setZ$ est de la forme $n\setZ$ où $n$ est à la fois le plus petit élément strictement positif et l'indice du sous-groupe.
+
+      \proposition{Morphisme avec $\setZ$} Soit $x\in G$ et $\varphi_x:k\mapsto x^k$
+      \begin{itemize}
+        \item Si $x$ est d'ordre infini, alors $\setZ\simeq\langle x\rangle$.
+        \item Si $x$ est d'ordre $n$, alors $\ker\varphi_x = n\setZ$. On a un isomorphisme $k [n]\mapsto x^k$ induit par passage au quotient.
+      \end{itemize}
+
+      \corollaire{Ordre et groupe engendré} Fini ou infini, $\omega(x)=\abs{\langle x\rangle}$.
+
+      \corollaire{Puissances triviales} Soit $x$ d'ordre $d$. Alors $x^n=e$ si et seulement si $d\divides n$.
+
+      \theoreme{Lagrange} Soit $G$ un groupe fini. Alors pour tout $x$, $\omega(x)\divides\abs{G}$ et $x^{\abs{G}}=e$.
+
+  \subsection{Groupes cycliques et fonction indicatrice d'Euler}
+
+    \subsubsection{Groupes cycliques}
+
+      \proposition{Caractérisation} Soit $G$ groupe fini d'ordre $N$ et $g\in G$. Les \Asse{}.
+      \begin{itemize}
+        \item $g$ est d'ordre $N$
+        \item $G$ est engendré par $g$
+        \item Il existe un isomorphisme $\setZ/N\setZ$ dont l'image de $1$ est $g$
+        \item Tout élément de $G$ est une puissance de $g$
+      \end{itemize}
+
+      On dit alors que $G$ est cyclique d'ordre $N$.
+
+      \proposition{Sous-groupes de $\setZ/n\setZ$} Si $n$ est strictement positif, les sous-groupes de $\setZ/n\setZ$ sont exactement les $d\setZ/n\setZ$ où $d\divides n$, et sont cycliques d'ordre $n/d$ et indice $d$. Leurs éléments sont ceux dont l'ordre divise $n/d$, et pour tout $x$, $\langle x\rangle = (x\wedge n)\setZ/n\setZ$.
+
+      \corollaire{Bezout} Soient $a,b$ deux entiers relatifs non nuls. Il existe $u,v$ tels que $au+bv=a\wedge b$.
+
+      \corollaire{Puissances} Soit $G$ d'ordre $n$. Pour tout $x\in G$ et $d\divides n$, $x$ est une puissance $d$-ième si et seulement si $x^{n/d} = e$. Par conséquent pour tout $k$, $x$ est une puissance $k$-ième si et seulement si $x^{n/{n\wedge k}}=e$.
+
+    \subsubsection{Fonction indicatrice d'Euler}
+
+      \definition{Fonction indicatrice d'Euler} On définit pour tout $n>0$ la fonction indicatrice d'Euler $\varphi$ telle que $\varphi(n)$ soit le nombre de générateurs de $\setZ/n\setZ$.
+
+      \lemme{\'Eléments d'ordre $k$} Soit $G$ cyclique d'ordre $n$. Pour tout $k$, $G$ possède $\varphi(k)$ éléments d'ordre $k$ si $k\divides n$, $0$ sinon. On a alors $$n = \sum[k\divides n]{\varphi(k)}$$
+
+      \lemme{Produit d'éléments premiers entre eux} Soient $m,n$ premiers entre eux. Pour tous $k\divides m, l\divides n$, $kl$ divise $mn$ et réciproquement, tout diviseur de $mn$ se décompose uniquement en un produit $kl$. Ceci met en bijection les diviseurs de $mn$ avec le produit cartésien des diviseurs de $m$ et $n$.
+
+      \proposition{Indicatrice et facteurs premiers} Si $n$ se décompose $\prod[i]{p_i^{k_i}}$ en produit de puissances de facteurs premiers distincts, alors
+      \[\varphi(n) = \prod[i]{(p_i-1)p_i^{k_i-1}}\]
+
+  \subsection{Structure des groupes abéliens finis}
+
+    \subsubsection{Exposant d'un groupe abélien fini}
+
+      \definition{Exposant} Si $G$ est un groupe abélien fini, on note $\omega(G)$ son exposant, i.e., le ppcm des ordres de ses éléments.
+
+      \proposition{Élément primitif} $G$ admet un élément d'ordre $\omega(G)$.
+
+      \proposition{Décomposition} Soit $x$ un élément primitif de $G$, $π:G\rightarrow G/\langle x\rangle$ la projection canonique. Alors tout $\bar{y}$ possède un antécédent $y$ par $\pi$ d'ordre $\omega_G(y)=\omega_{G/\langle x\rangle}(\bar{y})$.
+
+    \subsubsection{Théorème des diviseurs élémentaires, facteurs invariants}
+
+      \note{Todo!!}
+
+\section{Arithmétique modulaire}
+
+  \subsection{Anneaux et idéaux, corps, polynômes}
+
+    \definition{Anneau} Un anneau $A$ est la donnée de deux lois de composition internes $+,\times$, deux éléments $0,1$ tels que
+    \begin{itemize}
+      \item $(A,+,0)$ est un groupe abélien
+      \item $(A,\times,1)$ est un magma associatif unitaire (monoïde)
+      \item $\times$ est distributive par rapport à $+$
+    \end{itemize}
+
+    On dit que l'anneau est commutatif si son monoïde multiplicatif est commutatif. Dans la suite, tous les anneaux le sont.
+
+    \definition{Inversibles} $x$ est inversible dans $A$ s'il l'est pour la multiplication. On note $A^\times$ le groupe multiplicatif des éléments inversibles de $A$.
+
+    \definition{Diviseur de zéro} $x$ est diviseur de $0$ s'il est non nul et s'il existe $y\neq 0$ tel que $xy=0$.
+
+    \definition{Anneau intègre} $A$ est dit intègre s'il est non nul et n'admet pas de diviseur de zéro.
+
+    \definition{Morphisme d'anneaux} $\varphi$ est un morphisme d'anneaux s'il est un morphisme de leurs groupes additifs et un morphisme de leurs monoïdes multiplicatifs.
+
+    \definition{Sous-anneaux} Une partie de $A$ est un sous-anneau si c'est simultanément un sous-groupe du groupe additif et un sous-monoïde du monoïde multiplicatif (stable par $\times$).
+
+    \lemme{Intersection} Une intersection quelconque de sous-anneaux de $A$ est toujours un sous-anneau.
+
+    \proposition{Sous-anneau engendré} Soit $A\preccurlyeq B$ sous-anneau de $B$ et $S\subset B$ quelconque. $A[S]$, intersection de tous les sous-anneaux de $B$ contenant $A$ et $S$, et le plus petit sous-anneau contenant $A$ et $S$. On l'appelle sous-anneau de $B$ engendré par $S$ et $A$.
+
+    $A$ est un sous-anneau de $A[S]$.
+
+    \definition{Idéal} $I\subset A$ est un idéal si c'est un sous-groupe additif stable par multiplication externe, i.e., $\forall a\in A, i\in I, ai\in I$.
+
+    \lemme{Passage au produit externe} Pour tous $a,x,y\in A$, si $x\equiv y [I]$ alors $ax\equiv ay [I]$.
+
+    \proposition{Passage au quotient} Le groupe abélien $A/I$ dispose naturellement d'une loi de multiplication qui le munit d'une structure d'anneau pour laquelle la projection canonique est un morphisme d'anneaux.
+
+    \lemme{Idéaux et morphismes} L'image réciproque d'un idéal par un morphisme d'anneaux reste un idéal. Si ce morphisme est surjectif, c'est aussi valable dans le sens direct.
+
+    \lemme{Morphisme avec $\setZ$} Si $A$ est un anneau il existe un unique morphisme d'anneau $\setZ\rightarrow A$. Celui-ci envoie $n$ sur $n\cdot 1$ pour tout $n$.
+
+    \definition{Caractéristique d'un anneau intègre}
+
+  \subsection{Anneaux factoriels}
+
+    \proposition{Éléments associés} Soient $A$ un anneau intègre, $a,b$ deux éléments non-nuls. Alors les \Asse{}.
+    \begin{itemize}
+      \item $a\divides b$ et $b\divides a$
+      \item il existe $u\in A^\times$ tel que $a=ub$
+      \item les idéaux principaux $Aa$ et $Ab$ sont égaux
+    \end{itemize}
+
+    On dit alors que $a\sim b$ sont associés, ce qui définit une relation d'équivalence sur $A-\{0\}$.
+
+    \definition{Plus grand commun diviseur} Soit $A$ intègre et $a,b$ non nuls. On dit que $d$ non nul est un pgcd de $a$ et $b$ s'il divise $a$ et $b$ et si tout diviseur commun de $a$ et $b$ le divise.
+
+    \lemme{PGCD associés} Tous les pgcd de $a$ et $b$, s'il y en a, sont associés entre eux et réciproquement, tout élément associé à un pgcd l'est aussi.
+
+    \definition{PGCD} Soit $A$ muni d'un système de représentants $S$ pour la relation $\sim$. On note $\pgcd(a,b)$ l'unique pgcd de $a,b$ qui appartienne à $S$, lorsqu'il existe. On peut faire de même pour le ppcm.
+
+    \definition{Élément irréductible} Dans $A$ intègre, $a$ est dit irréductible s'il n'est pas inversible et si toute décomposition $a=bc$ contient un élément inversible ($a$ est donc associé au second élément).
+
+    \definition{Système représentatif} On dit que $P\subset A$ est un système représentatif d'éléments irréductibles de $A$ s'il est formé d'irréductibles et si tout irréductible de $A$ est associé à un élément de $P$ et un seul.
+
+    \lemme{Stabilité par équivalence} Le carractère irréductible est compatible avec la relation d'équivalence $\sim$.
+
+    \definition{Anneau factoriel} Soit $A$ intègre muni d'un système représentatif $P$. On dit qu'il est factoriel si pour tout $a$ non nul il existe une unique partie $I\subset P$ finie, une unique famille $(k_p)_{p\in I}$ d'entiers strictements positifs et un unique élément $u$ unitaire tels que
+    \[a = u\prod[p\in I]{p^{k_p}}\]
+
+    \theoreme{PGCD et PPCM dans un anneau factoriel} Tout couple d'éléments non nuls d'un anneau factoriel admet un pgcd et un ppcm dont le produit est associé à leur produit.
+
+  \subsection{Anneaux principaux}
+
+    \subsubsection{Arithmétique dans les anneaux principaux}
+
+    \definition{Anneau principal} Un anneau principal est un anneau intègre dont tout idéal est principal, i.e., monogène.
+
+    \theoreme{Inversibilité} Les inversible modulo $m$ de $A$ sont les $x$ dont le pgcd avec $m$ est unitaire. L'inverse est alors donné par Bézout.
+
+    \corollaire{Quotient corps} $A/m$ est un corps si et seulement si $m$ est irréductible si et seulement si $A/m$ est intègre.
+
+      Dans le cas résiduellement fini, \note{Formuler cette partie du cours (page 38).}
+
+    \theoreme{Théorème chinois} Si $A$ est principal et $m,n$ sont premiers entre eux, $A/mn$ est isomorphe à $A/m\times A/n$.
+
+  \subsection{Anneaux euclidiens}
+
+    \definition{Anneau euclidien} Un anneau euclidien est un anneau intègre $A$ muni d'un stathme $\abs\cdot:A\rightarrow\setN$ tel que:
+    \begin{itemize}
+      \item $\abs{a}=0\ssi a=0$
+      \item $\forall m,n\neq 0, \exists q,r, \abs{r}<\abs{n}, m=qn+r$
+    \end{itemize}
+
+    \theoreme{Factorialité} On a la double implication suivante pour un anneau.
+    \[\text{euclidien} \implies \text{principal} \implies \text{factoriel}\]
+
+    \note{Algorithme d'euclide étendu}
+
+  \subsection{Théorème de l'élément primitif}
+
+    \theoreme{Élément primitif} Si $K$ est un corps, alors tout sous-groupe de $K^\times$ est cyclique.
+
+    \corollaire{Racines} Si $\abs{K}=q$ et $d\divides q-1$, alors pour tout $y\in K^\times$ on a
+    \[\exists x, y = x^d \ssi y^{(q-1)/d} = 1\]
+
+    \theoreme{Structure multiplicative des $\setZ/n\setZ$} Pour tout $p$ premier impair,
+    \[\left(\setZ/p^e\setZ\right)^\times\simeq\setZ/(p-1)p^{e-1}\setZ\]
+
+    Pour $p=2$ et tout $e\geq2$,
+    \[\left(\setZ/2^e\setZ\right)^\times\simeq\setZ/2\setZ\times\setZ/2^{e-2}\setZ\]
+
+    En combinant le théorème chinois, le théorème de structure des groupes abéliens finis et ce théorème, on sait décrire les $\left(\setZ/n\setZ\right)^\times$.
+
+    \note{Exemple?}
+
+  \subsection{Réciprocité quadratique}
+
+    \subsubsection{Critère d'Euler et symbole de Legendre}
+
+      \theoreme{Critère d'Euler} \cite[prop 1.5 p.~3]{mat552} Soit $p$ premier impair et $a$ premier avec $p$. Alors
+      \[a^{\frac{p-1}2} \equiv \left(\frac{a}{p}\right) [p]\]
+
+      \corollaire{Résidus quadratiques et $-1$} Modulo $p$, $-1$ est résidu quadratique si et seulement si $p=4k+1$. Dans le cas où $p=4k+3$, $-1$ n'est pas résidu quadratique modulo $p$.
+
+    \subsubsection{Lemme de Gauss}
+
+      \lemme{Gauss} Soit $p$ premier impair et $a$ premier avec $p$. On note $S=\{1,\ldots,\frac{p-1}2\}$ de sorte que $\left(\setZ/p\setZ\right)^\times=-S\sqcup S$. Pour tout $s\in S$ on peut écrire la classe de $as$ sous la forme $as\equiv\varepsilon_s(a)s_a$ avec $\varepsilon_s(a)=\pm1$ et $s_a\in S$ uniques.
+
+      Alors $s\mapsto s_a$ est une permutation de $S$ et on a
+      \[\left(\frac{a}{p}\right) = \prod[s\in S]{\varepsilon_s(a)}\]
+
+      \corollaire{Résidus quadratiques et $2$} \note{page 42}
+
+    \subsubsection{Une identité trigonométrique}
+
+      \lemme{Sinus} \note{page 42}
+
+    \subsubsection{Réciprocité quadratique pour le symbole de Legendre}
+
+      \theoreme{Réciprocité quadratique} \note{page 44}
+
+    \subsubsection{Symbole de Jacobi}
+
+      \definition{Symbole de Jacobi} \note{page 45}
+
+      \proposition{Propriétés du symbole de Jacobi} \note{page 45}
+
+\section{Corps finis}
+
+\progress{Page 49}
+
+\clearpage
+\nocite{*}
+\printbibliography[heading=none]
+
+\end{document}
