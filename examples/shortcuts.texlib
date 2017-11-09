@@ -1,0 +1,259 @@
+% vim: ft=tex
+
+\newcommandx{\cprob}[2][1={}]{\ifthenelse{\equal{#1}{}}{\mathbb{P}}{\mathbb{P}_{#1}}\!\cro{#2}}
+\newcommandx{\cesp}[2][1={}]{\ifthenelse{\equal{#1}{}}{\mathbb{E}}{\mathbb{E}_{#1}}\!\cro{#2}}
+
+\newcommandx{\union}[3][1={}, 2={}]{\bigcup\limits\ifthenelse{\equal{#1}{}}{}{_{#1}\ifthenelse{\equal{#2}{}}{}{^{#2}}}{#3}}
+
+\let\oldsum=\sum
+\renewcommandx{\sum}[3][1={},2={}]{\oldsum\ifthenelse{\equal{#1}{}}{}{_{#1}\ifthenelse{\equal{#2}{}}{}{^{#2}}}{#3}}
+\newcommandx{\psum}[3][1={},2={}]{\sum[#1][#2]{\prt{#3}}}
+% \makeatletter
+% \def\sum{\@ifnextchar_{\s@um}{\@su@m}}
+% \def\s@um_#1{\@ifnextchar^{\@sum_#1}{\@s@um_#1}}
+% \def\@sum_#1^#2{\@ifnextchar({\@@sum_#1^#2}{\@ifnextchar[{\@@@sum_#1^#2}{\@@@@sum_#1^#2}}}
+% \def\@s@um_#1{\@ifnextchar({\@@s@um_#1}{\@ifnextchar[{\@@@s@um_#1}{\@@@@s@um_#1}}}
+% \def\@su@m{\@ifnextchar({\@@su@m}{\@ifnextchar[{\@@@su@m}{\@@@@su@m}}}
+% \def\@@sum_#1^#2(#3){\oldsum_{#1}^{#2}{\prt{#3}}}
+% \def\@@s@um_#1(#2){\oldsum_{#1}{\prt{#2}}}
+% \def\@@su@m(#1){\oldsum{\prt{#1}}}
+% \def\@@@sum_#1^#2[#3]{\oldsum_{#1}^{#2}{\cro{#3}}}
+% \def\@@@s@um_#1[#2]{\oldsum_{#1}{\cro{#2}}}
+% \def\@@@su@m[#1]{\oldsum{\cro{#1}}}
+% \def\@@@@sum_#1^#2#3{\oldsum_{#1}^{#2}{#3}}
+% \def\@@@@s@um_#1#2{\oldsum_{#1}{#2}}
+% \def\@@@@su@m#1{\oldsum{#1}}
+% \makeatother
+
+\let\oldprod=\prod
+\renewcommandx{\prod}[3][1={},2={}]{\oldprod\ifthenelse{\equal{#1}{}}{}{_{#1}\ifthenelse{\equal{#2}{}}{}{^{#2}}}{#3}}
+\newcommandx{\pprod}[3][1={},2={}]{\prod[#1][#2]{\prt{#3}}}
+
+\let\oldint=\int
+\renewcommandx{\int}[3][1={},2={}]{\displaystyle\oldint\ifthenelse{\equal{#1}{}}{}{_{#1}\ifthenelse{\equal{#2}{}}{}{^{#2}}}{#3}}
+\newcommandx{\pint}[3][1={},2={}]{\int[#1][#2]{\prt{#3}}}
+
+\let\oldlim=\lim \let\oldlimsup=\limsup \let\oldliminf=\liminf
+\renewcommandx{\lim}[2][1={}]{\displaystyle\oldlim\ifthenelse{\equal{#1}{}}{}{_{#1}{#2}}}
+\newcommandx{\plim}[2][1={}]{\lim[#1]{\prt{#2}}}
+\makeatletter
+\def\fleche{\@ifnextchar(\@fleche \longrightarrow}
+\def\@fleche(#1){\@@fleche(#1,,)}
+\def\@@fleche(#1,#2,#3){
+    \ifx\relax#2\relax
+        \xrightarrow{#1}
+    \else
+        \xrightarrow[#2]{#1}
+    \fi
+}
+\makeatother
+
+\newcommand{\pgcd}[1]{\mathrm{pgcd}\!\prt{#1}}
+\newcommand{\ppcm}[1]{\mathrm{ppcm}\!\prt{#1}}
+
+\newcommand{\esp}{\mathbb{E}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\supp}[1]{\mathrm{supp}\prt{#1}}
+\def\endo{}\renewcommand{\endo}[1]{#1\!\!\circlearrowleft}
+
+\def\im{}\renewcommand{\im}[1]{\makebox{$\mathrm{Im}\!\prt{#1}$}}
+\def\ker{}\renewcommand{\ker}[1]{\makebox{$\mathrm{Ker}\!\prt{#1}$}}
+\def\bij{}\renewcommand{\bij}[1]{\makebox{$\mathrm{Bij}\!\prt{#1}$}}
+\def\hom{}\renewcommand{\hom}{\mathrm{Hom}}
+\def\aut{}\renewcommand{\aut}{\mathrm{Aut}}
+\def\gal{}\renewcommand{\gal}{\mathrm{Gal}}
+
+\newcommand{\prt}[1]{\left(#1\right)}
+\newcommand{\brc}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\cro}[1]{\left[#1\right]}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\card}[1]{{\#{#1}}}
+\newcommand{\car}[1]{\mathrm{car}\!\prt{#1}}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\scal}[1]{\left\langle #1 \right\rangle}
+
+\def\seg[#1,#2]{\left[#1~;~#2\right]}
+\def\sego]#1,#2[{\left]#1~;~#2\right[}
+\def\dte(#1,#2){\left(#1~;~#2\right)}
+\def\intseg[#1,#2]{\llbracket #1~;~#2\rrbracket}
+\makeatletter
+\def\ddte{\@ifnextchar[\@ddte \@ifnextchar(\@@ddte}
+\def\@ddte[#1,#2){\left[#1~; #2\right)}
+\def\@@ddte(#1,#2]{\left(#1~; #2\right]}
+\makeatother
+
+\newcommand{\acts}{\lefttorightarrow}
+
+\newcommand{\sys}[1]{\left\{ \begin{array}{l} #1 \end{array} \right.}
+\newcommandx{\fsys}[7][3={\rightarrow},6={\mapsto}]{\begin{array}{rrcl} #1\ifthenelse{\equal{#1}{}}{}{:}&#2&#3&#4 \\ {}&#5&#6&#7 \end{array}}
+%\newcommand{\mod}[1]{~~\cro{#1}}
+
+\newcommand{\nor}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\norme}[2][{}]{\left\lVert #2 \right\rVert_{#1}}
+
+\newcommand{\adherence}[1]{\overline{#1}}
+\newcommand{\fd}[2]{\dfrac{\d #1}{\d #2}}
+\newcommand{\fpartial}[2]{\dfrac{\partial #1}{\partial #2}}
+
+\newcommand{\alteq}[1]{~{_#1}\!\!=}
+\newcommand{\COMM}[1]{\hspace{5mm}{\itshape\color{grey}#1}}
+
+\newcommand{\ind}{\mathbf{1}}
+
+\newcommand{\pinf}{{+\infty}}
+\newcommand{\minf}{{-\infty}}
+
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setK}{\mathbb{K}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setS}{\mathfrak{S}}
+
+\newcommand{\Zquo}[1]{\setZ/#1\setZ}
+
+\newcommandx{\GL}[2][1={}]{\mathcal{GL}\ifthenelse{\equal{#1}{}}{}{_{#1}}\ifthenelse{\equal{#2}{}}{}{\!\prt{#2}}}
+\newcommand\bbF{\mathbb{F}}
+\def\fkS{}\renewcommand\fkS{\mathfrak{S}}
+\def\bbH{}\renewcommand{\bbH}[1]{\mathbb{H}\ifthenelse{\equal{#1}{}}{}{\prt{#1}}}
+\newcommand{\scrC}[1]{\mathscr{C}^{#1}}
+
+\newcommand{\normalletters}{
+    \let\C=\scrC
+    \renewcommand{\d}{\mathrm{d}}
+    \newcommand{\D}{\mathcal{D}}
+    \newcommand{\e}{\mathrm{e}}
+    \newcommand\E{\mathcal{E}}
+    \newcommand\F{\mathcal{F}}
+    \def\l{}\renewcommand{\l}{\ell}
+    \def\L{}\renewcommand{\L}{\mathcal{L}}
+    \newcommand{\M}{\mathscr{M}}
+    \newcommand{\N}{\mathcal{N}}
+    \newcommand{\p}{\mathbf{p}}
+    \def\R{\mathcal{R}}
+    \def\S{}\renewcommand\S{\mathcal{S}}
+}\normalletters{}
+
+\newcommand{\letters}[1]{%
+    \def\A{}\renewcommand\A{#1{A}}%
+    \def\B{}\renewcommand\B{#1{B}}%
+    \def\C{}\renewcommand\C{#1{C}}%
+    \def\D{}\renewcommand\D{#1{D}}%
+    \def\E{}\renewcommand\E{#1{E}}%
+    \def\F{}\renewcommand\F{#1{F}}%
+    \def\G{}\renewcommand\G{#1{G}}%
+    \def\H{}\renewcommand\H{#1{H}}%
+    \def\I{}\renewcommand\I{#1{I}}%
+    \def\J{}\renewcommand\J{#1{J}}%
+    \def\K{}\renewcommand\K{#1{K}}%
+    \def\L{}\renewcommand\L{#1{L}}%
+    \def\M{}\renewcommand\M{#1{M}}%
+    \def\N{}\renewcommand\N{#1{N}}%
+    \def\O{}\renewcommand\O{#1{O}}%
+    \def\P{}\renewcommand\P{#1{P}}%
+    \def\Q{}\renewcommand\Q{#1{Q}}%
+    \def\R{}\renewcommand\R{#1{R}}%
+    \def\S{}\renewcommand\S{#1{S}}%
+    \def\T{}\renewcommand\T{#1{T}}%
+    \def\U{}\renewcommand\U{#1{U}}%
+    \def\V{}\renewcommand\V{#1{V}}%
+    \def\W{}\renewcommand\W{#1{W}}%
+    \def\X{}\renewcommand\X{#1{X}}%
+    \def\Y{}\renewcommand\Y{#1{Y}}%
+    \def\Z{}\renewcommand\Z{#1{Z}}%
+}
+\newcommand{\frakletters}{\letters{\mathfrak}}
+\newcommand{\bbletters}{\letters{\mathbb}}
+\newcommand{\calletters}{\letters{\mathcal}}
+\newcommand{\rmletters}{\letters{\mathrm}}
+\newcommand{\scrletters}{\letters{\mathscr}}
+
+\def\bb.#1{\mathbb{#1}}
+\def\rm.#1{\mathrm{#1}}
+\def\cal.#1{\mathcal{#1}}
+\def\scr.#1{\mathscr{#1}}
+\def\frak.#1{\mathfrak{#1}}
+\def\mbf.#1{\mathbf{#1}}
+
+\newcommand{\ssi}{\quad\Leftrightarrow\quad}
+\newcommand{\Ssi}{si et seulement si }
+\newcommand{\Asse}{assertions suivantes sont équivalentes }
+\newcommand{\cad}{c'est-à-dire }
+
+\newcommand{\m}{martingale }
+\newcommand{\sN}{_{n \geq 0}}
+\newcommand{\ma}{\brc{X_n}\sN}
+
+\newcommand{\convloi}{\xrightarrow[n\rightarrow\pinf]{\mathscr{L}}}
+
+\newcommand{\inv}[1]{\left({#1}^{-1}\right)\!}
+\newcommand{\vc}[1]{\underline{#1}}
+\newcommand{\fl}[1]{\overline{#1}}
+\newcommand{\indh}[1]{{^{#1}}}
+\newcommand{\indb}[1]{{_{#1}}}
+\newcommand{\indhh}[2]{\indh{#1}\indh{#2}}
+\newcommand{\indbb}[2]{\indb{#1}\indb{#2}}
+\newcommand{\indhb}[2]{\indh{#1}\indb{#2}}
+\newcommand{\indbh}[2]{\indb{#1}\indh{#2}}
+
+\newenvironment{enumered}[1][red]{
+    \begin{enumerate}[label=\textcolor{#1}{\arabic*.}]
+}{
+    \end{enumerate}
+}
+
+\newenvironment{enumerateperso}[5]{% 1: format des nombres, 2: \labelenum, 3: \theenum, 4: enum, 5: prefixe
+    \begin{enumerate}
+    \ifthenelse{\equal{#1}{1.}}{\renewcommand{#3}{\arabic{#4}}\renewcommand{#2}{#5#3.}}{
+    \ifthenelse{\equal{#1}{a.}}{\renewcommand{#3}{\alph{#4}}\renewcommand{#2}{#5#3.}}{
+    \ifthenelse{\equal{#1}{A.}}{\renewcommand{#3}{\Alph{#4}}\renewcommand{#2}{#5#3.}}{
+    \ifthenelse{\equal{#1}{i.}}{\renewcommand{#3}{\roman{#4}}\renewcommand{#2}{#5#3.}}{
+    \ifthenelse{\equal{#1}{I.}}{\renewcommand{#3}{\Roman{#4}}\renewcommand{#2}{#5#3.}}{
+    \ifthenelse{\equal{#1}{1)}}{\renewcommand{#3}{\arabic{#4}}\renewcommand{#2}{#5#3)}}{
+    \ifthenelse{\equal{#1}{a)}}{\renewcommand{#3}{\alph{#4}}\renewcommand{#2}{#5#3)}}{
+    \ifthenelse{\equal{#1}{A)}}{\renewcommand{#3}{\Alph{#4}}\renewcommand{#2}{#5#3)}}{
+    \ifthenelse{\equal{#1}{i)}}{\renewcommand{#3}{\roman{#4}}\renewcommand{#2}{#5#3)}}{
+    \ifthenelse{\equal{#1}{I)}}{\renewcommand{#3}{\Roman{#4}}\renewcommand{#2}{#5#3)}}{
+    \ifthenelse{\equal{#1}{(1)}}{\renewcommand{#3}{\arabic{#4}}\renewcommand{#2}{#5(#3)}}{
+    \ifthenelse{\equal{#1}{(a)}}{\renewcommand{#3}{\alph{#4}}\renewcommand{#2}{#5(#3)}}{
+    \ifthenelse{\equal{#1}{(A)}}{\renewcommand{#3}{\Alph{#4}}\renewcommand{#2}{#5(#3)}}{
+    \ifthenelse{\equal{#1}{(i)}}{\renewcommand{#3}{\roman{#4}}\renewcommand{#2}{#5(#3)}}{
+    \ifthenelse{\equal{#1}{(I)}}{\renewcommand{#3}{\Roman{#4}}\renewcommand{#2}{#5(#3)}}{
+    }}}}}}}}}}}}}}}
+}{
+    \end{enumerate}
+}
+
+
+\newcommand{\defaultliste}{1.}
+\newcommand{\changeitems}[1]{
+    \renewcommand{\defaultliste}{#1}
+}
+\newenvironment{liste}[1][{\defaultliste}]{
+    \begin{enumerateperso}{#1}{\labelenumi}{\theenumi}{enumi}{}
+}{
+    \end{enumerateperso}
+}
+
+\newcommand{\defaultsubliste}{a)}
+\newcommand{\changesubitems}[1]{
+    \renewcommand{\defaultsubliste}{#1}
+}
+\newenvironment{subliste}[1][{\defaultsubliste}]{
+    \begin{enumerateperso}{#1}{\labelenumii}{\theenumii}{enumii}{}
+}{
+    \end{enumerateperso}
+}
+
+\newcommand{\defaultsubsubliste}{(i)}
+\newcommand{\changesubsubitems}[1]{
+    \renewcommand{\defaultsubsubliste}{#1}
+}
+\newenvironment{subsubliste}[1][{\defaultsubsubliste}]{
+    \begin{enumerateperso}{#1}{\labelenumiii}{\theenumiii}{enumiii}{}
+}{
+    \end{enumerateperso}
+}
