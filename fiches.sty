@@ -189,7 +189,6 @@
 		\renewcommand{\makeheadrule}{%
 			\makebox[0pt][l]{\rule[-0.4\baselineskip]{\linewidth}{0.8pt}}
 		}
-
 }
 \newcommand{\polytitresave}{}%stockage du titre
 \newcommand{\polysoustitresave}{}%stockage du sous-titre
@@ -254,6 +253,7 @@
 \newcommand{\expcolor}{grey}%exemple. no symbol. use \defindent
 \newcommand{\demcolor}{mauve}\newcommand{\demsymb}{$\square$}%demonstration. no beginning symbol. no indent
 \newcommand{\indcolor}{olive}%indication. no symbol. no indent
+\newcommand{\hypcolor}{steel}%hypothesis. no symbol. no indentation
 \newcommand{\blankcolor}{black}\newcommand{\blanksymb}{}
 
 \if@english
@@ -269,6 +269,7 @@
 	\newcommand{\demintit}{Proof}%demonstration
 	\newcommand{\indintit}{Indication}%indication
 	\newcommand{\remintit}{Remark}%remarque
+    \newcommand{\hypintit}{Hypothesis}%hypothèse
 \else
 	\newcommand{\defintit}{Définition}%definition
 	\newcommand{\pptintit}{Propriété}%propriete
@@ -280,8 +281,9 @@
 	\newcommand{\metintit}{Méthode}%methode
 	\newcommand{\expintit}{Exemple}%exemple
 	\newcommand{\demintit}{Démonstration}%demonstration
-	\newcommand{\indintit}{Indication}%indication
+	\newcommand{\indintit}{Hint}%indication
 	\newcommand{\remintit}{Remarque}%remarque
+    \newcommand{\hypintit}{Hypothèse}%hypothèse
 \fi
 \newcommand{\blankintit}{}
 
@@ -399,6 +401,18 @@
    }
    \hspace{\defindent}\textcolor{\metcolor}{\makebox[5mm]{\metsymb} \colorlet{refs}{\metcolor}\textbf{\metintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
 }
+\newcommand{\hypothese}[2][{}]{ %hypothese
+   \renewcommand{\thelistingnum}{l'hypothèse \lelistingnum}
+   \refstepcounter{listingnum}
+   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+   \ifthenelse{\equal{#2}{}}{
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{} \lelistingnum}
+   }{
+       \addcontentsline{toc}{subsubsection}{\vind\metintit{} \lelistingnum~(#2)}
+   }
+   \textcolor{\hypcolor}{\colorlet{refs}{\hypcolor}\textbf{\hypintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
+}
+
 
 %========
 % Commandes de listing 2
