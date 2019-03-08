@@ -258,32 +258,50 @@
 
 \if@english
 	\newcommand{\defintit}{Definition}%definition
+    \newcommand{\deflistingname}{\defintit}
 	\newcommand{\pptintit}{Property}%propriete
+    \newcommand{\pptlistingname}{\pptintit}
 	\newcommand{\lemintit}{Lemma}%lemme
+    \newcommand{\lemlistingname}{\lemintit}
 	\newcommand{\prointit}{Proposition}%proposition
+    \newcommand{\prolistingname}{\prointit}
 	\newcommand{\corintit}{Corollary}%corollaire
+    \newcommand{\corlistingname}{\corintit}
 	\newcommand{\thmintit}{Theorem}%theoreme
+    \newcommand{\thmlistingname}{\thmintit}
 	\newcommand{\fmlintit}{Formula}%formule
+    \newcommand{\fmllistingname}{\fmlintit}
 	\newcommand{\metintit}{Method}%methode
+    \newcommand{\metlistingname}{\metintit}
 	\newcommand{\expintit}{Example}%exemple
 	\newcommand{\demintit}{Proof}%demonstration
 	\newcommand{\indintit}{Indication}%indication
 	\newcommand{\remintit}{Remark}%remarque
     \newcommand{\hypintit}{Hypothesis}%hypothèse
+    \newcommand{\hyplistingname}{\hypintit}
 \else
 	\newcommand{\defintit}{Définition}%definition
+    \newcommand{\deflistingname}{la définition}
 	\newcommand{\pptintit}{Propriété}%propriete
+    \newcommand{\pptlistingname}{la propriété}
 	\newcommand{\lemintit}{Lemme}%lemme
+    \newcommand{\lemlistingname}{le lemme}
 	\newcommand{\prointit}{Proposition}%proposition
+    \newcommand{\prolistingname}{la proposition}
 	\newcommand{\corintit}{Corollaire}%corollaire
+    \newcommand{\corlistingname}{le corollaire}
 	\newcommand{\thmintit}{Théorème}%theoreme
+    \newcommand{\thmlistingname}{le théorème}
 	\newcommand{\fmlintit}{Formule}%formule
+    \newcommand{\fmllistingname}{la formule}
 	\newcommand{\metintit}{Méthode}%methode
+    \newcommand{\metlistingname}{la méthode}
 	\newcommand{\expintit}{Exemple}%exemple
 	\newcommand{\demintit}{Démonstration}%demonstration
 	\newcommand{\indintit}{Hint}%indication
 	\newcommand{\remintit}{Remarque}%remarque
     \newcommand{\hypintit}{Hypothèse}%hypothèse
+    \newcommand{\hyplistingname}{l'hypothèse}
 \fi
 \newcommand{\blankintit}{}
 
@@ -310,43 +328,43 @@
 %========
 \newcommand{\vind}{\hspace{0mm}}
 \newcommand{\definition}[2][{}]{ %definition
-   \renewcommand{\thelistingnum}{la définition \lelistingnum}
-   \refstepcounter{listingnum}
-   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
-   \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \lelistingnum}}
-       \hspace{\defindent}\textcolor{\defcolor}{\colorlet{refs}{\defcolor}\makebox[5mm]{\defsymb} \textbf{\defintit{} \lelistingnum} : }
-   }{
-       \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \lelistingnum}~(#2)}
-       \hspace{\defindent}\textcolor{\defcolor}{\colorlet{refs}{\defcolor}\makebox[5mm]{\defsymb} \textbf{\defintit{} \lelistingnum} [\textit{#2}] : }
-   }
+    \renewcommand{\thelistingnum}{\deflistingname~\lelistingnum}
+    \refstepcounter{listingnum}
+    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+    \ifthenelse{\equal{#2}{}}{
+        \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \lelistingnum}}
+        \hspace{\defindent}\textcolor{\defcolor}{\colorlet{refs}{\defcolor}\makebox[5mm]{\defsymb} \textbf{\defintit{} \lelistingnum} : }
+    }{
+        \addcontentsline{toc}{subsubsection}{\vind\textbf{\defintit{} \lelistingnum}~(#2)}
+        \hspace{\defindent}\textcolor{\defcolor}{\colorlet{refs}{\defcolor}\makebox[5mm]{\defsymb} \textbf{\defintit{} \lelistingnum} [\textit{#2}] : }
+    }
 }
 \newcommand{\propriete}[2][{}]{ %propriete
-   \renewcommand{\thelistingnum}{la propriété \lelistingnum}
-   \refstepcounter{listingnum}
-   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
-   \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \lelistingnum}
-       \hspace{\defindent}\textcolor{\pptcolor}{\colorlet{refs}{\pptcolor}\makebox[5mm]{\pptsymb} \textbf{\pptintit{} \lelistingnum} : }
-   }{
-       \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \lelistingnum~(#2)}
-       \hspace{\defindent}\textcolor{\pptcolor}{\colorlet{refs}{\pptcolor}\makebox[5mm]{\pptsymb} \textbf{\pptintit{} \lelistingnum} [\textit{#2}] : }
-   }
+    \renewcommand{\thelistingnum}{\pptlistingname~\lelistingnum}
+    \refstepcounter{listingnum}
+    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+    \ifthenelse{\equal{#2}{}}{
+        \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \lelistingnum}
+        \hspace{\defindent}\textcolor{\pptcolor}{\colorlet{refs}{\pptcolor}\makebox[5mm]{\pptsymb} \textbf{\pptintit{} \lelistingnum} : }
+    }{
+        \addcontentsline{toc}{subsubsection}{\vind\pptintit{} \lelistingnum~(#2)}
+        \hspace{\defindent}\textcolor{\pptcolor}{\colorlet{refs}{\pptcolor}\makebox[5mm]{\pptsymb} \textbf{\pptintit{} \lelistingnum} [\textit{#2}] : }
+    }
 }
 \newcommand{\lemme}[2][{}]{ %lemme
-   \renewcommand{\thelistingnum}{le lemme \lelistingnum}
-   \refstepcounter{listingnum}
-   \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
-   \ifthenelse{\equal{#2}{}}{
-       \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \lelistingnum}
-       \hspace{\thmindent}\textcolor{\lemcolor}{\colorlet{refs}{\lemcolor}\makebox[5mm]{\lemsymb} \textbf{\lemintit{} \lelistingnum} -- }
-   }{
-       \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \lelistingnum~(#2)}
-       \hspace{\thmindent}\textcolor{\lemcolor}{\colorlet{refs}{\lemcolor}\makebox[5mm]{\lemsymb} \textbf{\lemintit{} \lelistingnum} [\textit{#2}] -- }
-   }
+    \renewcommand{\thelistingnum}{\lemlistingname~\lelistingnum}
+    \refstepcounter{listingnum}
+    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
+    \ifthenelse{\equal{#2}{}}{
+        \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \lelistingnum}
+        \hspace{\thmindent}\textcolor{\lemcolor}{\colorlet{refs}{\lemcolor}\makebox[5mm]{\lemsymb} \textbf{\lemintit{} \lelistingnum} -- }
+    }{
+        \addcontentsline{toc}{subsubsection}{\vind\lemintit{} \lelistingnum~(#2)}
+        \hspace{\thmindent}\textcolor{\lemcolor}{\colorlet{refs}{\lemcolor}\makebox[5mm]{\lemsymb} \textbf{\lemintit{} \lelistingnum} [\textit{#2}] -- }
+    }
 }
 \newcommand{\proposition}[2][{}]{ %proposition
-   \renewcommand{\thelistingnum}{la proposition \lelistingnum}
+   \renewcommand{\thelistingnum}{\prolistingname~\lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
    \ifthenelse{\equal{#2}{}}{
@@ -357,7 +375,7 @@
    \hspace{\thmindent}\textcolor{\procolor}{\colorlet{refs}{\procolor}\makebox[5mm]{\prosymb} \textbf{\prointit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\textit{#2}]} -- }
 }
 \newcommand{\corollaire}[2][{}]{ %corollaire
-   \renewcommand{\thelistingnum}{le corollaire \lelistingnum}
+   \renewcommand{\thelistingnum}{\corlistingname~\lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
    \ifthenelse{\equal{#2}{}}{
@@ -369,7 +387,7 @@
    }
 }
 \newcommand{\theoreme}[2][{}]{ %theoreme
-   \renewcommand{\thelistingnum}{le théorème \lelistingnum}
+   \renewcommand{\thelistingnum}{\thmlistingname~\lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
    \ifthenelse{\equal{#2}{}}{
@@ -380,7 +398,7 @@
    \hspace{\thmindent}\textcolor{\thmcolor}{\makebox[5mm]{\thmsymb} \colorlet{refs}{\thmcolor}\textbf{\thmintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} -- }
 }
 \newcommand{\formule}[2][{}]{ %formule
-   \renewcommand{\thelistingnum}{la formule \lelistingnum}
+   \renewcommand{\thelistingnum}{\fmllistingname~\lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
    \ifthenelse{\equal{#2}{}}{
@@ -391,7 +409,7 @@
    \hspace{\defindent}\textcolor{\fmlcolor}{\makebox[5mm]{\fmlsymb} \colorlet{refs}{\fmlcolor}\textbf{\fmlintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
 }
 \newcommand{\methode}[2][{}]{ %methode
-   \renewcommand{\thelistingnum}{la méthode \lelistingnum}
+   \renewcommand{\thelistingnum}{\metlistingname~\lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
    \ifthenelse{\equal{#2}{}}{
@@ -402,7 +420,7 @@
    \hspace{\defindent}\textcolor{\metcolor}{\makebox[5mm]{\metsymb} \colorlet{refs}{\metcolor}\textbf{\metintit{} \lelistingnum} \ifthenelse{\equal{#2}{}}{}{[\emph{#2}]} : }
 }
 \newcommand{\hypothese}[2][{}]{ %hypothese
-   \renewcommand{\thelistingnum}{l'hypothèse \lelistingnum}
+   \renewcommand{\thelistingnum}{\hyplistingname~\lelistingnum}
    \refstepcounter{listingnum}
    \ifthenelse{\equal{#1}{}}{}{\etiquette{#1}}
    \ifthenelse{\equal{#2}{}}{
