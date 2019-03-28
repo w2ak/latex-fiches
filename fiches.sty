@@ -206,6 +206,15 @@
 \renewcommand*{\date}[1]{
 	\renewcommand*{\polydatesave}{#1}
 }
+\newcommand{\logo}[2][]{
+    \ifthenelse{\equal{#1}{}}{
+        \renewcommand{\polylogovert}{#2}
+        \renewcommand{\polylogohori}{#2}
+    }{
+        \renewcommand{\polylogovert}{#1}
+        \renewcommand{\polylogohori}{#2}
+    }
+}
 
 %========
 % Definition de la page de titre
